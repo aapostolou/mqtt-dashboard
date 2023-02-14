@@ -5,7 +5,7 @@ import { styles } from './Header.styles'
 const Header = () => (
   <AppBar position="sticky" sx={styles.appbar}>
     <Toolbar>
-      <Box>Header</Box>
+      <Box>MQTT Dashboard</Box>
     </Toolbar>
   </AppBar>
 )

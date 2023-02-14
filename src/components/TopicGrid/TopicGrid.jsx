@@ -1,15 +1,19 @@
 import { Box } from '@mui/material'
 
-import { Topic } from '..'
+import { Topic, useTopics } from '..'
 
 import { styles } from './TopicGrid.styles'
 
-const TopicGrid = ({ topics = [] }) => (
-  <Box sx={styles.container}>
-    {topics.map((topic, i) => (
-      <Topic {...topic} key={i} />
-    ))}
-  </Box>
-)
+const TopicGrid = () => {
+  const { topics } = useTopics()
+
+  return (
+    <Box sx={styles.container}>
+      {topics.map((topic, i) => (
+        <Topic {...topic} key={topic.id} />
+      ))}
+    </Box>
+  )
+}
 
 export default TopicGrid

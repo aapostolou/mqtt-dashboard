@@ -1,6 +1,9 @@
 export const styles = {
   container: {
-    marginLeft: '300px',
+    display: 'flex',
+  },
+  main: {
+    flex: 1,
   },
   content: {
     py: 2,

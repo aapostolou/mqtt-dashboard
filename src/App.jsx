@@ -1,8 +1,17 @@
-import { CustomThemeProvider, Layout } from './components'
+import {
+  CustomThemeProvider,
+  Layout,
+  SocketProvider,
+  TopicsProvider,
+} from './components'
 
 const App = () => (
   <CustomThemeProvider>
-    <Layout />
+    <SocketProvider>
+      <TopicsProvider>
+        <Layout />
+      </TopicsProvider>
+    </SocketProvider>
   </CustomThemeProvider>
 )
 

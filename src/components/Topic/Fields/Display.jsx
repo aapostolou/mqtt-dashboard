@@ -2,6 +2,10 @@ import { Box } from '@mui/material'
 
 import { styles } from './Fields.styles'
 
-const Display = () => <Box sx={styles.container}>Display Component</Box>
+const Display = ({ message, onMessage, ...props }) => (
+  <Box {...props} sx={styles.container}>
+    {message}
+  </Box>
+)
 
 export default Display
