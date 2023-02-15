@@ -1,35 +1,28 @@
 import { useTopicProps } from './hooks/useTopicProps'
 
-import { TopicSettings, useSocket } from '..'
-import { ButtonField, Display, SwitchField, Thermometer } from './Fields'
-
+import { TopicSettings, useTopics } from '..'
 import { Paper } from '@mui/material'
+
+import { fields } from './Fields'
 
 import { styles } from './Topic.styles'
 
-const fields = {
-  button: ButtonField,
-  display: Display,
-  switch: SwitchField,
-  thermometer: Thermometer,
-}
-
 const Topic = ({ id, topic, message, variant, properties }) => {
-  const socket = useSocket()
+  const { sendMessage } = useTopics()
 
-  const onMessage = (message) => {
-    socket.emit('message', { topic, message })
-  }
+  const currentField = fields?.[variant] ?? fields._fallback
 
-  const Component = fields[variant]
+  const Component = currentField?.component
+  const Icon = currentField?.icon
 
   const componentProps = {
     ...useTopicProps({ message, ...properties }),
-    onMessage,
+    sendMessage: sendMessage(topic),
   }
 
   return (
     <Paper elevation={4} sx={styles.paper}>
+      {currentField.icon && <Icon sx={styles.icon} />}
       <TopicSettings id={id} topic={topic} {...properties} />
 
       <Component {...componentProps} />

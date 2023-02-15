@@ -7,6 +7,6 @@ export const useProperty = ({ message, property }) =>
     }
 
     if (typeof property === 'object') {
-      return property?.[message] ?? property?.fallback
+      return property?.[message] ?? property?._fallback
     }
   }, [message, property])

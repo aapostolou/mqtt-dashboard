@@ -20,6 +20,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:server": "cd ./mqtt-node-server && npm run develop",
+    "develop": "concurrently --kill-others \"npm start\" \"npm run develop:server\"",
+    "develop:server": "cd ./mqtt-node-server && npm i && npm run develop",
+    "dev": "npm run develop",
+    "dev:server": "npm run develop:server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -41,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
   }
 }

@@ -6,7 +6,7 @@ exports.mockState = [
     variant: 'button',
     properties: {
       value: '',
-      label: 'Clear (default)',
+      label: 'Clear Lights Value',
     },
   },
   {
@@ -54,8 +54,8 @@ exports.mockState = [
     variant: 'switch',
     properties: {
       value: ['ON', 'OFF'],
-      label: 'Toggle Lights (with falback color)',
-      color: { ON: 'success', OFF: 'error', fallback: 'warning' },
+      label: 'Toggle Lights (with fallback color)',
+      color: { ON: 'success', OFF: 'error', _fallback: 'warning' },
     },
   },
   // { variant: 'thermometer' },

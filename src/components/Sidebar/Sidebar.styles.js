@@ -10,9 +10,14 @@ export const styles = {
       width,
     },
   },
+
   toolbar: {
     borderBottom: 1,
     borderColor: 'rgba(0, 0, 0, 0.12)',
+  },
+
+  closeButton: {
+    ml: 'auto',
   },
 
   container: {

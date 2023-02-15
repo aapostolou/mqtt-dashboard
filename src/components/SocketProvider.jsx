@@ -18,8 +18,12 @@ const SocketProvider = ({ children }) => {
   })
 
   // Logger
-  socket.on('message', (payload) => {
-    console.log(payload)
+  socket.onAny((event, payload, ...rest) => {
+    console.log('Socket Event', {
+      event,
+      payload,
+      ...rest,
+    })
   })
 
   return <Context.Provider value={socket}>{children}</Context.Provider>

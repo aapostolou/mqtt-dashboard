@@ -4,7 +4,14 @@ import { Button } from '@mui/material'
 
 import { styles } from './Fields.styles'
 
-const SwitchField = ({ label, message, value, color, onMessage, ...props }) => {
+const SwitchField = ({
+  label,
+  message,
+  value,
+  color,
+  sendMessage,
+  ...props
+}) => {
   const buttonColor = useMemo(() => {
     if (typeof color === 'string') {
       return color
@@ -20,8 +27,8 @@ const SwitchField = ({ label, message, value, color, onMessage, ...props }) => {
 
     const newValue = value[index + 1] ?? value?.[0]
 
-    onMessage(newValue)
-  }, [message, value])
+    sendMessage(newValue)
+  }, [message, value, sendMessage])
   return (
     <Button
       variant="contained"

@@ -1,5 +1,7 @@
 const { mockState } = require('./mockState')
 
+const { SOCKET } = require('../constants')
+
 function Broker(io, initialState = mockState) {
   this.state = initialState
 
@@ -11,20 +13,32 @@ function Broker(io, initialState = mockState) {
 
       return { ...entry, message }
     })
-
-    console.log('Broker udpate', { topic, message })
-
-    io.emit('message', { topic, message })
+    io.emit(SOCKET.TOPIC_MESSAGE, { topic, message })
   }
 
-  this.onUpdate = () => {}
+  this.onAdd = ({ topic }) => {
+    const id = 0
+  }
+
+  this.onUpdate = ({ id, properties }) => {
+    this.state = this.state.map((entry) => {
+      if (entry.id !== id) {
+        return entry
+      }
+
+      return {
+        ...entry,
+        properties,
+      }
+    })
+
+    io.emit(SOCKET.TOPIC_UPDATE, { id, properties })
+  }
 
   this.onDelete = ({ id }) => {
-    console.log('Deleting topic', { id })
-
     this.state = this.state.filter((entry) => entry.id !== id)
 
-    io.emit('delete', { id })
+    io.emit(SOCKET.TOPIC_DELETE, { id })
   }
 }
 

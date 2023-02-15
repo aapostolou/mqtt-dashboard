@@ -10,13 +10,16 @@ export const styles = {
     transition: 'all 0.3s ease',
 
     zIndex: 100,
-
-    '&:hover': {
-      opacity: 1,
-    },
   },
 
-  container: {
-    pb: 3,
+  actions: {
+    py: 2,
+    px: { sm: 3, xs: 2 },
+
+    justifyContent: 'space-evenly',
+
+    '& > *': {
+      flex: 1,
+    },
   },
 }

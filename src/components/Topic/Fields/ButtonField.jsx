@@ -2,9 +2,9 @@ import { Button } from '@mui/material'
 
 import { styles } from './Fields.styles'
 
-const ButtonField = ({ label, value, color, onMessage, ...props }) => {
+const ButtonField = ({ label, value, color, sendMessage, ...props }) => {
   const handleClick = () => {
-    onMessage(value)
+    sendMessage(value)
   }
 
   return (

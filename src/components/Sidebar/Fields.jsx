@@ -1,36 +1,19 @@
-import { Box, Stack } from '@mui/material'
+import { Box, Stack, Typography } from '@mui/material'
 
-import TvIcon from '@mui/icons-material/Tv'
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked'
-import RotateRightIcon from '@mui/icons-material/RotateRight'
-
-const fields = [
-  {
-    icon: TvIcon,
-    label: 'Display',
-  },
-  {
-    icon: RadioButtonCheckedIcon,
-    label: 'Button',
-  },
-  {
-    icon: RotateRightIcon,
-    label: 'Switch',
-  },
-  {
-    icon: () => <></>,
-    label: 'Thermometer',
-  },
-]
+import { fields } from '../.'
 
 const Fields = () => (
   <Stack spacing={2}>
-    {fields.map((field, i) => {
+    <Typography variant="h5">Fields</Typography>
+
+    {Object.keys(fields).map((key, i) => {
+      const field = fields[key]
+
       const Icon = field.icon
 
       return (
-        <Stack direction="row" spacing={1} key={i}>
-          <Icon />
+        <Stack direction="row" spacing={2} key={i}>
+          <Icon color="primary" />
           <Box>{field.label}</Box>
         </Stack>
       )
