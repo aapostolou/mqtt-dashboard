@@ -4,7 +4,7 @@ import { fields } from '../.'
 
 const Fields = () => (
   <Stack spacing={2}>
-    <Typography variant="h5">Fields</Typography>
+    <Typography variant="h5">Components</Typography>
 
     {Object.keys(fields).map((key, i) => {
       const field = fields[key]

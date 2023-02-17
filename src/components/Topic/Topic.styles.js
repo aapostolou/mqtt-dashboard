@@ -3,15 +3,30 @@ export const styles = {
     position: 'relative',
   },
 
-  icon: {
+  header: {
     position: 'absolute',
+
+    width: '100%',
 
     top: 0,
     left: 0,
 
-    m: 1,
+    pl: 1,
+
+    zIndex: 1,
 
     pointerEvents: 'none',
-    zIndex: 1,
+  },
+
+  title: {
+    flex: 1,
+
+    opacity: 0.7,
+
+    fontWeight: 'bold',
+
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
   },
 }

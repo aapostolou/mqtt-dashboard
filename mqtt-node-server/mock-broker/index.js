@@ -17,7 +17,16 @@ function Broker(io, initialState = mockState) {
   }
 
   this.onAdd = ({ topic }) => {
-    const id = 0
+    const id = Math.max(0, ...this.state.map((topic) => topic.id)) + 1
+
+    const newTopic = {
+      id,
+      ...topic,
+    }
+
+    this.state.push(newTopic)
+
+    io.emit(SOCKET.TOPIC_ADD, { topic: newTopic })
   }
 
   this.onUpdate = ({ id, properties }) => {

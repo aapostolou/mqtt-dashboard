@@ -1,6 +1,14 @@
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-import { Box, Container, Drawer, IconButton, Toolbar } from '@mui/material'
+import {
+  Box,
+  Container,
+  Drawer,
+  IconButton,
+  Stack,
+  Toolbar,
+} from '@mui/material'
+import { TopicAddNew } from 'components'
 import Fields from './Fields'
 
 import CloseIcon from '@mui/icons-material/Close'
@@ -29,7 +37,11 @@ const Sidebar = ({ open, onClose }) => {
           )}
         </Toolbar>
         <Container sx={styles.container}>
-          <Fields />
+          <Stack spacing={2}>
+            <Fields />
+
+            <TopicAddNew />
+          </Stack>
         </Container>
       </Drawer>
     </>

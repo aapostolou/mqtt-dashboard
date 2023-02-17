@@ -1,62 +1,51 @@
 exports.mockState = [
-  { id: 0, topic: 'LIGHTS', variant: 'display', properties: {} },
   {
     id: 1,
     topic: 'LIGHTS',
     variant: 'button',
     properties: {
-      value: '',
-      label: 'Clear Lights Value',
-    },
-  },
-  {
-    id: 2,
-    topic: 'LIGHTS',
-    variant: 'button',
-    properties: {
       value: 'ON',
-      label: 'Open Lights (with color)',
+      label: 'Open Lights',
       color: 'success',
     },
   },
+  { id: 2, topic: 'LIGHTS', variant: 'display', message: 'ON', properties: {} },
   {
     id: 3,
     topic: 'LIGHTS',
     variant: 'button',
     properties: {
       value: 'OFF',
-      label: 'Close Lights (with color)',
+      label: 'Close Lights',
       color: 'error',
     },
   },
   {
     id: 4,
-    topic: 'LIGHTS',
-    variant: 'switch',
+    topic: 'TEMPERATURE',
+    variant: 'button',
     properties: {
-      value: ['ON', 'OFF'],
-      label: 'Toggle Lights (default)',
+      value: -5,
+      label: 'Change Temperature to -10℃',
     },
   },
   {
     id: 5,
-    topic: 'LIGHTS',
-    variant: 'switch',
+    topic: 'TEMPERATURE',
+    variant: 'thermometer',
+    message: '20',
     properties: {
-      value: ['ON', 'OFF'],
-      label: 'Toggle Lights (with colors)',
-      color: { ON: 'success', OFF: 'error' },
+      color: 'green',
     },
   },
   {
     id: 6,
-    topic: 'LIGHTS',
-    variant: 'switch',
+    topic: 'TEMPERATURE',
+    variant: 'button',
     properties: {
-      value: ['ON', 'OFF'],
-      label: 'Toggle Lights (with fallback color)',
-      color: { ON: 'success', OFF: 'error', _fallback: 'warning' },
+      value: 30,
+      label: 'Change Temperature to 30℃',
+      color: 'error',
     },
   },
-  // { variant: 'thermometer' },
 ]

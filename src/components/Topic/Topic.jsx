@@ -1,7 +1,7 @@
 import { useTopicProps } from './hooks/useTopicProps'
 
 import { TopicSettings, useTopics } from '..'
-import { Paper } from '@mui/material'
+import { Box, Paper, Stack } from '@mui/material'
 
 import { fields } from './Fields'
 
@@ -20,10 +20,17 @@ const Topic = ({ id, topic, message, variant, properties }) => {
     sendMessage: sendMessage(topic),
   }
 
+  if (variant === 'display') {
+    console.log({ topic, variant, componentProps })
+  }
+
   return (
     <Paper elevation={4} sx={styles.paper}>
-      {currentField.icon && <Icon sx={styles.icon} />}
-      <TopicSettings id={id} topic={topic} {...properties} />
+      <Stack direction="row" alignItems="center" spacing={1} sx={styles.header}>
+        <Icon sx={styles.icon} />
+        <Box sx={styles.title}>{topic}</Box>
+        <TopicSettings id={id} topic={topic} {...properties} />
+      </Stack>
 
       <Component {...componentProps} />
     </Paper>

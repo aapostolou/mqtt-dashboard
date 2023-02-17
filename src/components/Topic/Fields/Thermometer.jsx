@@ -1,7 +1,12 @@
 import { Box } from '@mui/material'
+import { Thermometer } from 'components'
 
 import { styles } from './Fields.styles'
 
-const Thermometer = () => <Box sx={styles.container}>Thermometer Component</Box>
+const ThermometerField = ({ message, sendMessage, ...props }) => (
+  <Box {...props} sx={styles.container}>
+    <Thermometer {...props} value={message} />
+  </Box>
+)
 
-export default Thermometer
+export default ThermometerField

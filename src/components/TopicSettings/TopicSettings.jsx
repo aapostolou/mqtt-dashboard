@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Button,
@@ -10,10 +10,12 @@ import {
   Stack,
   TextField,
 } from '@mui/material'
+import { TopicAddNewProperty } from 'components'
 
 import { useTopics } from '..'
 
 import SettingsIcon from '@mui/icons-material/Settings'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 import { styles } from './TopicSettings.styles'
 
@@ -26,9 +28,14 @@ const TopicSettings = ({ id, topic, value, ...properties }) => {
   const { updateTopicProperty, deleteTopic } = useTopics()
 
   const [open, setOpen] = useState(false)
+  const [openNewProperty, setOpenNewProperty] = useState(false)
 
   const toggleOpen = () => {
     setOpen(!open)
+  }
+
+  const toggleOpenNewProperty = () => {
+    setOpenNewProperty(!openNewProperty)
   }
 
   const getPropertyValue = (property) => {
@@ -43,7 +50,7 @@ const TopicSettings = ({ id, topic, value, ...properties }) => {
     try {
       return JSON.parse(value)
     } catch (e) {
-      return value
+      return value.trim()
     }
   }
 
@@ -52,8 +59,6 @@ const TopicSettings = ({ id, topic, value, ...properties }) => {
 
     setPropertiesToUpdate({ ...propertiesToUpdate, [key]: valueCleanup(value) })
   }
-
-  const addNewProperty = () => {}
 
   const handleSaveTopic = () => {
     if (window.confirm('Save Topic ?')) {
@@ -69,7 +74,29 @@ const TopicSettings = ({ id, topic, value, ...properties }) => {
     }
   }
 
-  const hasProperties = Object.keys(propertiesToUpdate).length > 1
+  const handleAddNewProperty = ({ name, value }) => {
+    toggleOpenNewProperty()
+
+    setPropertiesToUpdate({
+      ...propertiesToUpdate,
+      [name]: valueCleanup(value),
+    })
+  }
+
+  const handleDeleteProperty = (key) => () => {
+    const { [key]: removed, ...rest } = propertiesToUpdate
+
+    setPropertiesToUpdate(rest)
+  }
+
+  const hasProperties = Object.keys(propertiesToUpdate).length > 0
+
+  useEffect(() => {
+    setPropertiesToUpdate({
+      ...propertiesToUpdate,
+      value,
+    })
+  }, [value])
 
   return (
     <>
@@ -82,16 +109,25 @@ const TopicSettings = ({ id, topic, value, ...properties }) => {
 
         <Container>
           <Stack spacing={2}>
-            {Object.keys(properties).map((property, i) => (
-              <TextField
-                label={property}
-                defaultValue={getPropertyValue(properties[property])}
-                onChange={onPropertyChange(property)}
-                key={i}
-              />
+            {Object.keys(propertiesToUpdate).map((property, i) => (
+              <Stack direction="row" alignItems="center" key={i}>
+                <TextField
+                  label={property}
+                  defaultValue={getPropertyValue(propertiesToUpdate[property])}
+                  onChange={onPropertyChange(property)}
+                />
+                <IconButton
+                  color="error"
+                  onClick={handleDeleteProperty(property)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Stack>
             ))}
 
-            <Button variant="outlined">Add New</Button>
+            <Button variant="outlined" onClick={toggleOpenNewProperty}>
+              Add Property
+            </Button>
           </Stack>
         </Container>
 
@@ -111,6 +147,13 @@ const TopicSettings = ({ id, topic, value, ...properties }) => {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <TopicAddNewProperty
+        open={openNewProperty}
+        properties={Object.keys(properties)}
+        onSubmit={handleAddNewProperty}
+        onClose={toggleOpenNewProperty}
+      />
     </>
   )
 }

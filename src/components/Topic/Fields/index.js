@@ -1,3 +1,4 @@
+import { default as Alert } from './Alert'
 import { default as ButtonField } from './ButtonField'
 import { default as Display } from './Display'
 import { default as SwitchField } from './SwitchField'
@@ -8,6 +9,7 @@ import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked'
 import RotateRightIcon from '@mui/icons-material/RotateRight'
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat'
 import DangerousIcon from '@mui/icons-material/Dangerous'
+import ReportProblemIcon from '@mui/icons-material/ReportProblem'
 
 export const fields = {
   display: {
@@ -29,6 +31,11 @@ export const fields = {
     component: Thermometer,
     icon: DeviceThermostatIcon,
     label: 'Thermometer',
+  },
+  alert: {
+    component: Alert,
+    icon: ReportProblemIcon,
+    label: 'Alert',
   },
 
   _fallback: {

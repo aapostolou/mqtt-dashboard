@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react'
 
 import { useSocket } from '.'
 
-import { SOCKET } from '../constants'
+import { SOCKET } from 'constants'
 
 const Context = createContext()
 
@@ -18,7 +18,7 @@ const TopicsProvider = ({ initialState = [], children }) => {
   })
 
   socket.on(SOCKET.TOPIC_ADD, ({ topic }) => {
-    setTopics({ ...topics, topic })
+    setTopics([...topics, topic])
   })
 
   socket.on(SOCKET.TOPIC_UPDATE, ({ id, properties }) => {
@@ -45,7 +45,12 @@ const TopicsProvider = ({ initialState = [], children }) => {
         return entry
       }
 
-      return { ...entry, message }
+      const properties = {
+        ...entry.properties,
+        date: Date.now(),
+      }
+
+      return { ...entry, message, properties }
     })
 
     setTopics(newTopics)
@@ -59,20 +64,20 @@ const TopicsProvider = ({ initialState = [], children }) => {
     socket.emit(SOCKET.TOPIC_ADD, { topic })
   }
 
-  const updateTopicProperty = (id) => (properties) => {
-    socket.emit(SOCKET.TOPIC_UPDATE, { id, properties })
-  }
-
   const deleteTopic = (id) => {
     socket.emit(SOCKET.TOPIC_DELETE, { id })
+  }
+
+  const updateTopicProperty = (id) => (properties) => {
+    socket.emit(SOCKET.TOPIC_UPDATE, { id, properties })
   }
 
   const value = {
     topics,
     sendMessage,
     addTopic,
-    updateTopicProperty,
     deleteTopic,
+    updateTopicProperty,
   }
 
   return <Context.Provider value={value}>{children}</Context.Provider>

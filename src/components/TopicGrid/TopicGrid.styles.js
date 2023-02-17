@@ -2,7 +2,7 @@ export const styles = {
   container: {
     display: 'grid',
     gridTemplateColumns: {
-      sm: 'repeat(auto-fill, minmax(200px, 1fr))',
+      sm: 'repeat(auto-fill, minmax(250px, 1fr))',
       xs: 'repeat(auto-fill, minmax(150px, 1fr))',
     },
     gap: {
